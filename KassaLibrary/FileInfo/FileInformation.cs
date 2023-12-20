@@ -1,41 +1,56 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using KassaLibrary.PrdoukInfo;
 
 namespace KassaLibrary.FileInfo
 {
     public class FileInformation 
     {
-        public List<Product> produkters = new List<Product>();
+        public List<Product> Products { get; private set; }
         public FileInformation()
         {
-            produkters = LoadProductsFromFile();
+            Products =  LoadProductsFromFile();
         }
-
+        
         public List<Product> LoadProductsFromFile()
         {
-
-            string[] allLines = File.ReadAllLines("../../../File/kassa.txt");
-            List<Product> produkters = new List<Product>();
-
-            foreach (string produktString in allLines)
+            try
             {
-                string[] produkt = produktString.Split(':');
+                string filePath = Path.GetFullPath("../../../File/kassa.txt");
+                string[] allLines = File.ReadAllLines(filePath);
+                Products = new List<Product>();
 
-                int description = Convert.ToInt32(produkt[0]);
-                string namn = produkt[1];
-                decimal price = Convert.ToDecimal(produkt[2]);
-                string type = produkt[3];
+                foreach (string productString in allLines)
+                {
+                    string[] product = productString.Split(':');
 
-                Product p = new Product(description, namn, price, type);
-                produkters.Add(p);
+                    int description = Convert.ToInt32(product[0]);
+                    string name = product[1];
+                    double price = (double)Convert.ToDecimal(product[2]);
+                    string type = product[3];
 
+                    //Product p = new Product(description, name, price,type);
+                    Products.Add(new Product(description, name, type, price));
+
+                }
+                return Products;
             }
-            foreach (Product P in produkters)
+            catch (Exception ex) 
             {
-                Console.WriteLine($"[{P.ProduktDescription}]," +
-                    $"[{P.ProduktName}]");
-            }
-            return produkters;
+                Console.WriteLine($"{ex.Message}");
+                return new List<Product>();
+            } 
+            
+
+
+            //foreach (Product P in products)
+            //{
+            //    int cursorLeft = Console.WindowWidth - (maxNameWidth + 10);
+            //    Console.SetCursorPosition(cursorLeft, Console.CursorTop);
+            //    Console.WriteLine($"[{P.ProductDescription}], [{P.ProductName}]");
+            //}
+
 
 
         }

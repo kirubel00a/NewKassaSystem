@@ -1,27 +1,33 @@
 ﻿using System;
+using KassaLibrary;
+
 
 namespace KassaLibrary.PrdoukInfo
 {
 
     public class Product
     {
-        public Product()
+
+       
+
+        public Product(int productDescription, string productName, string productType, double Price, double quantity = 1 )
         {
+            ProductDescription = productDescription;
+            ProductName = productName;
+            ProductType = productType;
+            ProductPrice = Price;
+            Quantity = quantity; 
+
         }
 
-        public Product(int description, string name, decimal price, string type)
-        {
-            ProduktName = name;
-            ProduktType = type;
-            ProduktDescription = description;
-            Price = price;
-        }
-        public string produtker { get; set; }
-        public int ProduktDescription { get; set; }
-        public string ProduktName { get; set; }
-        public decimal Price { get; set; }
-        public string ProduktType { get; set; }
 
-     
+
+        public int ProductDescription { get; set; }
+        public string ProductName { get; set; }
+        public double Price { get; set; }
+        public string ProductType { get; set; }
+        public double ProductPrice { get; }
+        public double Quantity { get; set; }
+        public double TotalPrice => ProductPrice * Quantity;
     }
 }

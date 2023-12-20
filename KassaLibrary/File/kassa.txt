@@ -1,6 +1,6 @@
 ﻿111: Banan:21,99:kg
 222: Avocado:22,99:kg
-333: Vattenmelon:20,00:kg
+333: Vattenmelon:20,99:kg
 123: Mango:18,99:kg
 122: Annans:15,25:kg 
 133: Gurka:12,99:kg

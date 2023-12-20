@@ -2,7 +2,7 @@
 
 namespace KassaLibrary.FileInfo
 {
-    public interface IFile
+    public interface IFile 
     {
         List<Product> LoadProductsFromFile();
     }

@@ -1,23 +1,22 @@
 ﻿using System;
-using KassaSystem.KassaLibrary;
 using KassaLibrary.FileInfo;
-using KassaSystem.PrdoukInfo;
 using KassaLibrary.PrdoukInfo;
 using System.IO;
+using KassaLibrary.ShoppingCart;
 
 namespace KassaSystem.KassaLibrary
-
 {
     public class Excuter
     {
-   
+        public static List<Product> Products { get; set; }
+        public double sum = 0;
+        private static List<Product> availableProducts;
+
         static void Main(string[] args)
         {
 
-            var fileInformation = new FileInformation();
-           List<Product>products = fileInformation.LoadProductsFromFile();
-
-            var checkout = new Checkout(products);
+            FileInformation fileInformation = new FileInformation();
+            List<Product> products = fileInformation.Products;
 
 
 
@@ -28,6 +27,7 @@ namespace KassaSystem.KassaLibrary
                 Console.WriteLine("1: Ny Kund");
                 Console.WriteLine("2: Exit");
 
+                
                 var userInput = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (userInput)
@@ -35,12 +35,17 @@ namespace KassaSystem.KassaLibrary
 
                     case 1:
                      Console.Clear();
-                        
-                     fileInformation.LoadProductsFromFile();
-                        var produkthanter = new producthanter(products);
-                        checkout.CheckoutProcces(produkthanter);
-                    
 
+
+                        fileInformation.LoadProductsFromFile();
+                        Checkout checkout = new Checkout(availableProducts, new ShoppingCart(),new ItemList());
+                        checkout.HandleUserInput();
+                        ShoppingCart shoppingCart = new ShoppingCart(); 
+                        shoppingCart.GenerateReceipt();
+
+                        break;
+                    case 2:
+                        Environment.Exit(0);
                         break;
                         
                 }
