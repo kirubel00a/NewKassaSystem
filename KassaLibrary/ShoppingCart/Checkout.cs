@@ -25,7 +25,8 @@ public class Checkout
         var fileInformation = new FileInformation();
         products = fileInformation.Products;
 
-        while (true) 
+        bool exitCheckout = false;
+        while (!exitCheckout) 
         {
             DisplayOptions();
 
@@ -64,7 +65,7 @@ public class Checkout
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input. Please enter a valid product index.");
+                            Console.WriteLine("Felaktig input.");
                         }
                         break;
                     case 3:
@@ -78,7 +79,7 @@ public class Checkout
                         break;
                     case 6:
                         Console.WriteLine("Tack för att du handlar! Avslutar...");
-                        Environment.Exit(0);
+                        exitCheckout = true;
                         break;
                 }
             }
@@ -90,7 +91,7 @@ public class Checkout
     {
         if (Products == null) 
         {
-            Console.WriteLine("Products list is null. Initializing...");
+            Console.WriteLine("Produktlistan är ogiltig....");
 
         }
         Console.WriteLine("Produkter:");

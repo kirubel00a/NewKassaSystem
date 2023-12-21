@@ -56,32 +56,37 @@ namespace KassaLibrary.ShoppingCart
         public void ClearCart()
         {
             cart.Clear();
-            Console.WriteLine("");
+            Console.WriteLine("Varukrget har tömts");
         }
         public void DisplayShoppingCart()
         {
             Console.WriteLine("VaruKorg:");
-
+            if (cart.Count == 0) 
+            {
+                Console.WriteLine("Du har inte lagt in produkt än...");
+            }
             for (int i = 0; i < cart.Count; i++)
             {
                 var product = cart[i];
-                Console.WriteLine($"| {i + 1} | {product.ProductName} | ${product.Price} | {product.Quantity} | ${product.TotalPrice} |");
+                Console.WriteLine($"| {i + 1} | {product.ProductName} | ${product.ProductPrice} | {product.Quantity} | ${product.TotalPrice} |");
             }
 
         }
         public void GenerateReceipt()
         {
-            Console.WriteLine(" KVITTOT ");
-            Console.WriteLine(" ------- ");
+            Console.WriteLine("+" + new string('-', 29) + "+");
+            Console.WriteLine($"| KVITTOT {DateTime.Now:yyyy-MM-dd HH:mm:ss} |");
+            Console.WriteLine("+" + new string('-', 29) + "+");
 
             foreach (Product Product in cart)
             {
 
                 Console.WriteLine($"{Product.ProductName} - {Product.ProductPrice}Kr * {Product.Quantity} = {Product.TotalPrice}kr");
             }
+            Console.WriteLine( "+" + new string('-', 15) + "+");
+            Console.WriteLine($"| Totalt: {GetTotalSum()}kr   |");
+            Console.WriteLine( "+" + new string('-', 15) + "+");
 
-            Console.WriteLine($"Totalt: {GetTotalSum()}kr ");
-            Console.WriteLine("---------------------");
             Console.WriteLine("Tack För Betalningen!");
         }
         public double GetTotalSum()

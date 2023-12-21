@@ -16,7 +16,6 @@ namespace KassaSystem.KassaLibrary
         {
 
             FileInformation fileInformation = new FileInformation();
-            List<Product> products = fileInformation.Products;
 
 
 
@@ -25,7 +24,7 @@ namespace KassaSystem.KassaLibrary
                 Console.Clear();
                 Console.WriteLine("Välkommen Till Kassan");
                 Console.WriteLine("1: Ny Kund");
-                Console.WriteLine("2: Exit");
+                Console.WriteLine("2: Avsluta!");
 
                 
                 var userInput = Convert.ToInt32(Console.ReadLine());
@@ -45,6 +44,7 @@ namespace KassaSystem.KassaLibrary
 
                         break;
                     case 2:
+                        Console.WriteLine("Hej Då");
                         Environment.Exit(0);
                         break;
                         
