@@ -47,8 +47,8 @@ public class Checkout
 
                         if (productParts.Length == 2 && int.TryParse(productParts[0], out int productID) && int.TryParse(productParts[1], out int quantity))
                         {
-                            Product selectedProduct = products.Find(p => p.ProductDescription == productID);
-                            shoppingCart.AddProduct(selectedProduct, quantity);
+                            Product addedProduct = products.Find(p => p.ProductDescription == productID);
+                            shoppingCart.AddProduct(addedProduct, quantity);
                         }
                         else
                         {
@@ -97,7 +97,10 @@ public class Checkout
         Console.WriteLine("Produkter:");
         foreach (Product p in Products)
         {
+
             Console.WriteLine($"{p.ProductDescription}. {p.ProductName} - {p.ProductPrice}");
+
+
         }
     }
    
